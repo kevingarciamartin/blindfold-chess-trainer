@@ -1,0 +1,15 @@
+.square {
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+
+  &.light {
+    background-color: var(--_clr-light);
+  }
+
+  &.dark {
+    background-color: var(--_clr-dark);
+  }
+}
