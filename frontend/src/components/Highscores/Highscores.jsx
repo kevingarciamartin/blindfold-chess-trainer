@@ -6,7 +6,7 @@ export default function Highscores() {
 
   useEffect(() => {
     const fetchHighscores = async () => {
-      const response = await fetch("/api/highscores");
+      const response = await fetch("/api/highscores/top/5");
       const data = await response.json();
 
       if (response.ok) {
