@@ -1,12 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;800&family=VT323&display=swap");
 
 :root {
-  --primary: #1aac83;
-  --error: #e7195a;
+  --clr-neutral-000: #fff;
+  --clr-neutral-100: #f1f1f1;
+  --clr-neutral-700: #555;
+  --clr-neutral-800: #333;
+  --clr-neutral-900: #1e1e1e;
+
+  --clr-background-primary: var(--clr-neutral-000);
+  --clr-background-secondary: var(--clr-neutral-100);
+  --clr-primary: #1aac83;
+  --clr-error: #e7195a;
 }
 
 body {
-  background: #f1f1f1;
+  background: var(--clr-background-secondary);
   font-family: "Poppins";
   margin: 0;
 }

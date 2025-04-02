@@ -1,17 +1,18 @@
 header {
-  background: #fff;
+  background: var(--clr-background-primary);
 
   & .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 10px 20px;
   }
 
   a {
-    color: #333;
+    color: var(--clr-neutral-800);
     text-decoration: none;
   }
 }
