@@ -18,11 +18,11 @@ export default function Highscores() {
   }, []);
 
   return (
-    <div className="highscores">
+    <section className="highscores">
       {highscores &&
         highscores.map((highscore) => (
-            <HighscoreDetails key={highscore._id} highscore={highscore} />  
+          <HighscoreDetails key={highscore._id} highscore={highscore} />
         ))}
-    </div>
+    </section>
   );
 }
