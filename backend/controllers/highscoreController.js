@@ -1,9 +1,20 @@
-import Highscore from "../models/highscoreModel.js";
 import mongoose from "mongoose";
+import Highscore from "../models/highscoreModel.js";
 
 // get all highscores
 const getHighscores = async (req, res) => {
   const highscores = await Highscore.find({}).sort({ score: -1 });
+
+  res.status(200).json(highscores);
+};
+
+// get top highscores
+const getTopHighscores = async (req, res) => {
+  let { amount } = req.params;
+
+  if (isNaN(Number(amount))) amount = 5;
+
+  const highscores = await Highscore.find({}).sort({ score: -1 }).limit(amount);
 
   res.status(200).json(highscores);
 };
@@ -54,6 +65,13 @@ const deleteHighscore = async (req, res) => {
   res.status(200).json(highscore);
 };
 
+// delete all highscores
+const deleteHighscores = async (req, res) => {
+  const highscores = await Highscore.deleteMany({});
+
+  res.status(200).json(highscores);
+};
+
 // update a highscore
 const updateHighscore = async (req, res) => {
   const { id } = req.params;
@@ -76,4 +94,12 @@ const updateHighscore = async (req, res) => {
   res.status(200).json(highscore);
 };
 
-export { getHighscores, getHighscore, createHighscore, deleteHighscore, updateHighscore };
+export {
+  getHighscores,
+  getTopHighscores,
+  getHighscore,
+  createHighscore,
+  deleteHighscore,
+  deleteHighscores,
+  updateHighscore,
+};
