@@ -10,7 +10,7 @@ export default function Chessboard() {
   return (
     <section className="chessboard">
       {coordinates.map((coordinate, index) => (
-        <Square coordinate={coordinate} index={index}/>
+        <Square key={coordinate} coordinate={coordinate} index={index}/>
       ))}
     </section>
   );

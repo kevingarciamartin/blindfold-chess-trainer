@@ -7,7 +7,6 @@ export default function Square({ coordinate, index }) {
 
   return (
     <button
-      key={coordinate}
       value={coordinate}
       className={`square ${isDarkSquare ? "dark" : "light"}`}
     ></button>
