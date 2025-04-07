@@ -1,12 +1,13 @@
 .chessboard {
-  --_clr-light: var(--clr-neutral-000);
-  --_clr-dark: var(--clr-neutral-800);
+  --_clr-light: #ecdab9;
+  --_clr-dark: #ae8a68;
 
   display: grid;
   grid-template-columns: repeat(8, 1fr);
 
-  border: 1px solid var(--_clr-dark);
-  height: min(600px, 80vh);
+  border-radius: 0.5rem;
+  width: min(600px, 100%);
   aspect-ratio: 1;
   margin: 0 auto;
+  overflow: clip;
 }
