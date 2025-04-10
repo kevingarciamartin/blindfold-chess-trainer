@@ -1,14 +1,20 @@
-import './HighscoreDetails.css'
+import "./HighscoreDetails.css";
 
 export default function HighscoreDetails({ highscore }) {
+  const { title, score, time, createdAt } = highscore;
+
   return (
     <article className="highscore-details">
-      <h3>{highscore.title}</h3>
+      <h3>{title}</h3>
       <p>
         <strong>Score: </strong>
-        {highscore.score}/10
+        {score}/10
       </p>
-      <p>{highscore.createdAt}</p>
+      <p>
+        <strong>Time: </strong>
+        {time}
+      </p>
+      <p>{createdAt}</p>
     </article>
   );
 }
