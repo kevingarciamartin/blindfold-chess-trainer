@@ -8,7 +8,7 @@ export default function HighscoreDetails({ highscore }) {
       <h3>{title}</h3>
       <p>
         <strong>Score: </strong>
-        {score}/10
+        {score}
       </p>
       <p>
         <strong>Time: </strong>
