@@ -12,4 +12,9 @@
   &.dark {
     background-color: var(--_clr-dark);
   }
+
+  &:hover,
+  &:focus-visible {
+    background-color: hsla(43, 74%, 49%, 0.75);
+  }
 }
