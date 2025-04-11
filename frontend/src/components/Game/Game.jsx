@@ -4,6 +4,7 @@ import { useNotification } from "../../contexts/NotificationContext";
 import { getCoordinates, formatTimer } from "../../utils/utils";
 import Chessboard from "../Chessboard/Chessboard";
 import Dialog from "../Dialog/Dialog";
+import ClearableInput from "../ClearableInput/ClearableInput";
 
 export default function Game() {
   const [score, setScore] = useState(0);
@@ -154,11 +155,10 @@ export default function Game() {
                 Time <strong>{formatTimer(timer)}</strong>
               </p>
             </section>
-            <input
-              type="text"
-              placeholder="Enter your name"
+            <ClearableInput
               value={playerName}
-              onChange={(e) => setPlayerName(e.target.value)}
+              onChange={(newValue) => setPlayerName(newValue)}
+              placeholder="Enter your name"
             />
             <section className="button-group">
               <button onClick={saveHighscore} className="btn-primary">
