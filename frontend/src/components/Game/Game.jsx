@@ -9,6 +9,8 @@ export default function Game() {
   const [timer, setTimer] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [clickedSquare, setClickedSquare] = useState(null);
+  const [isCorrectClick, setIsCorrectClick] = useState(null);
 
   const rows = ["8", "7", "6", "5", "4", "3", "2", "1"];
   const columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
@@ -40,15 +42,58 @@ export default function Game() {
     return () => clearInterval(interval);
   }, [isRunning]);
 
-  // Handle square click
   const handleSquareClick = (clickedCoordinate) => {
-    if (clickedCoordinate === targetCoordinate) setScore(score + 1);
+    setClickedSquare(clickedCoordinate);
 
-    if (round < 10) {
-      setRound(round + 1);
+    if (clickedCoordinate === targetCoordinate) {
+      setScore((prevScore) => prevScore + 1);
+      setIsCorrectClick(true);
     } else {
-      alert(`Game over! Score: ${score}, Time: ${timer} seconds`);
-      setIsPlaying(false);
+      setIsCorrectClick(false);
+    }
+
+    // Wait briefly before advancing to the next round
+    setTimeout(() => {
+      setClickedSquare(null);
+      setIsCorrectClick(null);
+      round < 10
+        ? setRound(round + 1)
+        : handleGameOver(
+            score + (clickedCoordinate === targetCoordinate ? 1 : 0)
+          );
+    }, 500);
+  };
+
+  const handleGameOver = async (finalScore) => {
+    setIsPlaying(false);
+
+    const name = prompt(
+      `Game over! Score: ${finalScore}, Time: ${timer} seconds.\nEnter your name to save your highscore:`
+    );
+
+    if (name) {
+      try {
+        const response = await fetch("api/highscores", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: name,
+            score: finalScore,
+            time: timer,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to save highscore");
+        }
+      } catch (error) {
+        console.error(error);
+        alert("An error occurred while saving your highscore.");
+      }
+    } else {
+      alert("Highscore not saved.");
     }
   };
 
@@ -64,7 +109,11 @@ export default function Game() {
       </p>
       <p>Score: {score}</p>
       <p>Timer: {timer}s</p>
-      <Chessboard onSquareClick={handleSquareClick} />
+      <Chessboard
+        onSquareClick={handleSquareClick}
+        clickedSquare={clickedSquare}
+        isCorrectClick={isCorrectClick}
+      />
     </div>
   );
 }
