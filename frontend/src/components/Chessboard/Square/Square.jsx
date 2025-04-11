@@ -5,6 +5,7 @@ export default function Square({
   index,
   onSquareClick,
   isHighlighted,
+  isInteractive,
 }) {
   const row = Math.trunc(index / 8);
   const column = (index % 8) + 1;
@@ -16,10 +17,18 @@ export default function Square({
   if (isHighlighted === false) highlightClass = "incorrect";
 
   return (
-    <button
-      value={coordinate}
-      className={`square ${isDarkSquare ? "dark" : "light"} ${highlightClass}`}
-      onClick={() => onSquareClick(coordinate)}
-    ></button>
+    <>
+      {isInteractive ? (
+        <button
+          value={coordinate}
+          className={`square ${
+            isDarkSquare ? "dark" : "light"
+          } ${highlightClass}`}
+          onClick={() => onSquareClick(coordinate)}
+        ></button>
+      ) : (
+        <div className={`square ${isDarkSquare ? "dark" : "light"} uninteractive`}></div>
+      )}
+    </>
   );
 }

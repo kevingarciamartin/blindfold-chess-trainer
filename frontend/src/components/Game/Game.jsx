@@ -1,3 +1,4 @@
+import "./Game.css";
 import { useState, useEffect } from "react";
 import { stringOuterProduct } from "../../utils/utils";
 import Chessboard from "../Chessboard/Chessboard";
@@ -97,23 +98,30 @@ export default function Game() {
     }
   };
 
-  if (!isPlaying) {
-    return <button onClick={() => setIsPlaying(true)}>Play</button>;
-  }
-
   return (
-    <div className="game">
-      <h3>Round {round}/10</h3>
-      <p>
-        Click on: <strong>{targetCoordinate}</strong>
-      </p>
-      <p>Score: {score}</p>
-      <p>Timer: {timer}s</p>
-      <Chessboard
-        onSquareClick={handleSquareClick}
-        clickedSquare={clickedSquare}
-        isCorrectClick={isCorrectClick}
-      />
-    </div>
+    <section className="game">
+      {!isPlaying ? (
+        <div className="overlay">
+          <button className="play-button" onClick={() => setIsPlaying(true)}>
+            Play
+          </button>
+          <Chessboard isInteractive={false} /> 
+        </div>
+      ) : (
+        <>
+          <h3>Round {round}/10</h3>
+          <p>
+            Click on: <strong>{targetCoordinate}</strong>
+          </p>
+          <p>Score: {score}</p>
+          <p>Timer: {timer}s</p>
+          <Chessboard
+            onSquareClick={handleSquareClick}
+            clickedSquare={clickedSquare}
+            isCorrectClick={isCorrectClick}
+          />
+        </>
+      )}
+    </section>
   );
 }

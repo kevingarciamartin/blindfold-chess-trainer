@@ -1,9 +1,12 @@
 .square {
   border: none;
-  cursor: pointer;
   width: 100%;
   aspect-ratio: 1;
   padding: 0;
+
+  &:not(.uninteractive) {
+    cursor: pointer;
+  }
 
   &.light {
     background-color: var(--_clr-light);
@@ -13,16 +16,16 @@
     background-color: var(--_clr-dark);
   }
 
-  &:hover,
+  &:not(.uninteractive):hover,
   &:focus-visible {
     background-color: hsla(43, 74%, 49%, 0.75);
   }
 
   &.correct {
-    background-color: hsla(120, 100%, 25%, 0.75);
+    background-color: hsla(120, 100%, 25%, 0.75) !important;
   }
 
   &.incorrect {
-    background-color: hsla(0, 100%, 50%, 0.75);
+    background-color: hsla(0, 100%, 50%, 0.75) !important;
   }
 }

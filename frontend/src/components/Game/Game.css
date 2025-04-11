@@ -1,0 +1,31 @@
+.overlay {
+  position: relative;
+
+  .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+
+    background-color: var(--clr-primary);
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0px 4px 6px hsla(0, 0%, 0%, 0.2);
+    color: var(--clr-neutral-000);
+    cursor: pointer;
+    font-size: 2rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    transition: box-shadow 300ms ease;
+
+    &:hover,
+    &:focus-visible {
+      box-shadow: 0px 6px 6px hsla(0, 0%, 0%, 0.4);
+    }
+  }
+
+  .chessboard {
+    filter: blur(10px);
+  }
+}
