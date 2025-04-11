@@ -1,16 +1,26 @@
 import "./Chessboard.css";
-import { stringOuterProduct } from "../../utils/utils";
+import { getCoordinates } from "../../utils/utils";
 import Square from "./Square/Square";
 
-export default function Chessboard() {
-  const rows = ["8", "7", "6", "5", "4", "3", "2", "1"];
-  const columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
-  const coordinates = stringOuterProduct(rows, columns).flat();
+export default function Chessboard({
+  onSquareClick,
+  clickedSquare,
+  isCorrectClick,
+  isInteractive = true,
+}) {
+  const coordinates = getCoordinates();
 
   return (
     <section className="chessboard">
       {coordinates.map((coordinate, index) => (
-        <Square key={coordinate} coordinate={coordinate} index={index}/>
+        <Square
+          key={coordinate}
+          coordinate={coordinate}
+          index={index}
+          onSquareClick={onSquareClick}
+          isHighlighted={clickedSquare === coordinate ? isCorrectClick : null}
+          isInteractive={isInteractive}
+        />
       ))}
     </section>
   );

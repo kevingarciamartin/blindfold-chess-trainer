@@ -14,7 +14,7 @@ const getTopHighscores = async (req, res) => {
 
   if (isNaN(Number(amount))) amount = 5;
 
-  const highscores = await Highscore.find({}).sort({ score: -1 }).limit(amount);
+  const highscores = await Highscore.find({}).sort({ score: -1, time: 1 }).limit(amount);
 
   res.status(200).json(highscores);
 };
@@ -38,10 +38,10 @@ const getHighscore = async (req, res) => {
 
 // create new highscore
 const createHighscore = async (req, res) => {
-  const { title, score } = req.body;
+  const { title, score, time } = req.body;
 
   try {
-    const highscore = await Highscore.create({ title, score });
+    const highscore = await Highscore.create({ title, score, time });
     res.status(200).json(highscore);
   } catch (error) {
     res.status(400).json({ error: error.message });
