@@ -1,6 +1,6 @@
 import "./Game.css";
 import { useState, useEffect } from "react";
-import { stringOuterProduct, formatTimer } from "../../utils/utils";
+import { getCoordinates, formatTimer } from "../../utils/utils";
 import Chessboard from "../Chessboard/Chessboard";
 
 export default function Game() {
@@ -13,9 +13,7 @@ export default function Game() {
   const [clickedSquare, setClickedSquare] = useState(null);
   const [isCorrectClick, setIsCorrectClick] = useState(null);
 
-  const rows = ["8", "7", "6", "5", "4", "3", "2", "1"];
-  const columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
-  const coordinates = stringOuterProduct(rows, columns);
+  const coordinates = getCoordinates();
 
   // Start game
   useEffect(() => {

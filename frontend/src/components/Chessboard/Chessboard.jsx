@@ -1,5 +1,5 @@
 import "./Chessboard.css";
-import { stringOuterProduct } from "../../utils/utils";
+import { getCoordinates } from "../../utils/utils";
 import Square from "./Square/Square";
 
 export default function Chessboard({
@@ -8,9 +8,7 @@ export default function Chessboard({
   isCorrectClick,
   isInteractive = true,
 }) {
-  const rows = ["8", "7", "6", "5", "4", "3", "2", "1"];
-  const columns = ["a", "b", "c", "d", "e", "f", "g", "h"];
-  const coordinates = stringOuterProduct(rows, columns);
+  const coordinates = getCoordinates();
 
   return (
     <section className="chessboard">
