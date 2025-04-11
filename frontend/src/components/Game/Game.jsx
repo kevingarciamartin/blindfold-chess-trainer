@@ -77,7 +77,7 @@ export default function Game() {
     }
 
     try {
-      const response = await fetch("/highscores", {
+      const response = await fetch("/api/highscores", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
