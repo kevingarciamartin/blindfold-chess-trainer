@@ -1,6 +1,6 @@
 import "./Game.css";
 import { useState, useEffect } from "react";
-import { stringOuterProduct } from "../../utils/utils";
+import { stringOuterProduct, formatTimer } from "../../utils/utils";
 import Chessboard from "../Chessboard/Chessboard";
 
 export default function Game() {
@@ -105,21 +105,32 @@ export default function Game() {
           <button className="play-button" onClick={() => setIsPlaying(true)}>
             Play
           </button>
-          <Chessboard isInteractive={false} /> 
+          <Chessboard isInteractive={false} />
         </div>
       ) : (
         <>
-          <h3>Round {round}/10</h3>
-          <p>
-            Click on: <strong>{targetCoordinate}</strong>
-          </p>
-          <p>Score: {score}</p>
-          <p>Timer: {timer}s</p>
           <Chessboard
             onSquareClick={handleSquareClick}
             clickedSquare={clickedSquare}
             isCorrectClick={isCorrectClick}
           />
+          <section className="game-details">
+            <header>
+              <p>Round {round}/10</p>
+              <p>{formatTimer(timer)}</p>
+            </header>
+            <main>
+              <p>
+                Click on <strong>{targetCoordinate}</strong>
+              </p>
+              <p>
+                Score <span>{score}</span>
+              </p>
+            </main>
+            <button className="exit-button" onClick={() => setIsPlaying(false)}>
+              Exit
+            </button>
+          </section>
         </>
       )}
     </section>
