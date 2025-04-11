@@ -5,8 +5,6 @@
   padding: 1.5rem;
   text-align: center;
 
-  width: min(300px, 80%);
-
   h2 {
     margin-block: 10px;
   }
@@ -23,12 +21,6 @@
       display: grid;
       justify-items: center;
     }
-  }
-
-  input {
-    margin-block: 0 1rem;
-    padding: 1rem;
-    width: 80%;
   }
 
   .button-group {
