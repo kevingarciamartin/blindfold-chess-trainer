@@ -1,0 +1,58 @@
+.dialog {
+  background-color: var(--clr-background-secondary);
+  border: none;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  text-align: center;
+
+  width: min(300px, 80%);
+
+  h2 {
+    margin-block: 10px;
+  }
+
+  .game-information {
+    display: flex;
+    justify-content: space-around;
+
+    p {
+      display: grid;
+      justify-items: center;
+    }
+  }
+
+  input {
+    margin-block: 0 1rem;
+    padding: 1rem;
+    width: 80%;
+  }
+
+  .button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+
+    width: 100%;
+
+    button {
+      transition: background-color 300ms ease;
+    }
+    
+    .btn-primary {
+      background-color: var(--clr-primary);
+      border: none;
+      border-radius: 0.125rem;
+      padding: 0.75rem 1rem;
+
+      &:hover,
+      &:focus-visible {
+        background-color: hsl(from var(--clr-primary ) h s 35%);
+      }
+    }
+
+  }
+
+  &::backdrop {
+    background-color: hsla(0, 0%, 0%, 0.5);
+  }
+}
