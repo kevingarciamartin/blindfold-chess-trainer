@@ -1,4 +1,5 @@
 import "./HighscoreDetails.css";
+import { formatTimer, formatDate } from "../../utils/utils";
 
 export default function HighscoreDetails({ highscore }) {
   const { title, score, time, createdAt } = highscore;
@@ -12,9 +13,9 @@ export default function HighscoreDetails({ highscore }) {
       </p>
       <p>
         <strong>Time: </strong>
-        {time}
+        {formatTimer(time)}
       </p>
-      <p>{createdAt}</p>
+      <p>{formatDate(createdAt)}</p>
     </article>
   );
 }
