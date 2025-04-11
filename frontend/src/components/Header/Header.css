@@ -15,4 +15,21 @@ header {
     color: var(--clr-neutral-800);
     text-decoration: none;
   }
+
+  nav ul {
+    display: flex;
+    gap: 1rem;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    a {
+      font-weight: 600;
+
+      &:is(.active) {
+        text-decoration: underline !important;
+      }
+    }
+  }
 }
