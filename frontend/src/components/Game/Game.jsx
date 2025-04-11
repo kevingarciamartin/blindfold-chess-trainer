@@ -1,5 +1,6 @@
 import "./Game.css";
 import { useState, useEffect } from "react";
+import { useNotification } from "../../contexts/NotificationContext";
 import { getCoordinates, formatTimer } from "../../utils/utils";
 import Chessboard from "../Chessboard/Chessboard";
 import Dialog from "../Dialog/Dialog";
@@ -15,6 +16,7 @@ export default function Game() {
   const [isCorrectClick, setIsCorrectClick] = useState(null);
   const [showDialog, setShowDialog] = useState(false);
   const [playerName, setPlayerName] = useState("");
+  const showNotification = useNotification();
 
   const ROUNDS = 1;
   const coordinates = getCoordinates();
@@ -70,12 +72,12 @@ export default function Game() {
 
   const saveHighscore = async () => {
     if (!playerName.trim()) {
-      alert("Please enter your name.");
+      showNotification("Please enter your name.", "error");
       return;
     }
 
     try {
-      const response = await fetch("api/highscores", {
+      const response = await fetch("/highscores", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -91,14 +93,16 @@ export default function Game() {
         throw new Error("Failed to save highscore");
       }
 
-      alert("Highscore saved successfully!");
+      showNotification("Highscore saved successfully!", "success");
+      setShowDialog(false);
+      setIsPlaying(false);
     } catch (error) {
       console.error(error);
-      alert("An error occurred while saving your highscore.");
+      showNotification(
+        "An error occurred while saving your highscore.",
+        "error"
+      );
     }
-
-    setShowDialog(false);
-    setIsPlaying(false);
   };
 
   return (
@@ -136,6 +140,7 @@ export default function Game() {
               Exit
             </button>
           </section>
+
           <Dialog
             title={"Game Over"}
             isOpen={showDialog}
@@ -156,7 +161,9 @@ export default function Game() {
               onChange={(e) => setPlayerName(e.target.value)}
             />
             <section className="button-group">
-              <button onClick={saveHighscore} className="btn-primary">Save</button>
+              <button onClick={saveHighscore} className="btn-primary">
+                Save
+              </button>
               <button
                 onClick={() => {
                   setShowDialog(false);
