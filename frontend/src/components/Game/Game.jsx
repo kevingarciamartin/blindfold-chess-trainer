@@ -2,6 +2,7 @@ import "./Game.css";
 import { useState, useEffect } from "react";
 import { getCoordinates, formatTimer } from "../../utils/utils";
 import Chessboard from "../Chessboard/Chessboard";
+import Dialog from "../Dialog/Dialog";
 
 export default function Game() {
   const [score, setScore] = useState(0);
@@ -12,12 +13,15 @@ export default function Game() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [clickedSquare, setClickedSquare] = useState(null);
   const [isCorrectClick, setIsCorrectClick] = useState(null);
+  const [showDialog, setShowDialog] = useState(false);
+  const [playerName, setPlayerName] = useState("");
 
+  const ROUNDS = 1;
   const coordinates = getCoordinates();
 
   // Start game
   useEffect(() => {
-    if (round <= 10 && isPlaying) {
+    if (round <= ROUNDS && isPlaying) {
       setTargetCoordinate(
         coordinates[Math.floor(Math.random() * coordinates.length)]
       );
@@ -55,45 +59,46 @@ export default function Game() {
     setTimeout(() => {
       setClickedSquare(null);
       setIsCorrectClick(null);
-      round < 10
-        ? setRound(round + 1)
-        : handleGameOver(
-            score + (clickedCoordinate === targetCoordinate ? 1 : 0)
-          );
+      round < ROUNDS ? setRound(round + 1) : handleGameOver();
     }, 500);
   };
 
-  const handleGameOver = async (finalScore) => {
-    setIsPlaying(false);
+  const handleGameOver = async () => {
+    setIsRunning(false);
+    setShowDialog(true);
+  };
 
-    const name = prompt(
-      `Game over! Score: ${finalScore}, Time: ${timer} seconds.\nEnter your name to save your highscore:`
-    );
-
-    if (name) {
-      try {
-        const response = await fetch("api/highscores", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: name,
-            score: finalScore,
-            time: timer,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error("Failed to save highscore");
-        }
-      } catch (error) {
-        console.error(error);
-        alert("An error occurred while saving your highscore.");
-      }
-    } else {
-      alert("Highscore not saved.");
+  const saveHighscore = async () => {
+    if (!playerName.trim()) {
+      alert("Please enter your name.");
+      return;
     }
+
+    try {
+      const response = await fetch("api/highscores", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: playerName,
+          score: score,
+          time: timer,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save highscore");
+      }
+
+      alert("Highscore saved successfully!");
+    } catch (error) {
+      console.error(error);
+      alert("An error occurred while saving your highscore.");
+    }
+
+    setShowDialog(false);
+    setIsPlaying(false);
   };
 
   return (
@@ -114,7 +119,9 @@ export default function Game() {
           />
           <section className="game-details">
             <header>
-              <p>Round {round}/10</p>
+              <p>
+                Round {round}/{ROUNDS}
+              </p>
               <p>{formatTimer(timer)}</p>
             </header>
             <main>
@@ -129,6 +136,37 @@ export default function Game() {
               Exit
             </button>
           </section>
+          <Dialog
+            title={"Game Over"}
+            isOpen={showDialog}
+            onClose={() => setShowDialog(false)}
+          >
+            <section className="game-information">
+              <p>
+                Score <strong>{score}</strong>
+              </p>
+              <p>
+                Time <strong>{formatTimer(timer)}</strong>
+              </p>
+            </section>
+            <input
+              type="text"
+              placeholder="Enter your name"
+              value={playerName}
+              onChange={(e) => setPlayerName(e.target.value)}
+            />
+            <section className="button-group">
+              <button onClick={saveHighscore} className="btn-primary">Save</button>
+              <button
+                onClick={() => {
+                  setShowDialog(false);
+                  setIsPlaying(false);
+                }}
+              >
+                Discard
+              </button>
+            </section>
+          </Dialog>
         </>
       )}
     </section>
