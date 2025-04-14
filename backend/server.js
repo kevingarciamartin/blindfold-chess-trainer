@@ -5,26 +5,25 @@ import routes from "./routes/highscores.js";
 
 dotenv.config();
 
-// express app
+// Express app
 const app = express();
 
-// middleware
+// Middleware
 app.use(express.json());
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
 
-// routes
+// Routes
 app.use("/api/highscores", routes);
 
-// connect to db
+// Connect to db
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => {
-    // listen for requests
     app.listen(process.env.PORT, () => {
-      console.log("Connected to db & listening on port", process.env.PORT);
+      console.log("Server is connected to db & listening on port", process.env.PORT);
     });
   })
   .catch((error) => {
