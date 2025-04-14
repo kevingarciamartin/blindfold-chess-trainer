@@ -3,7 +3,13 @@ import Highscore from "../models/highscoreModel.js";
 
 // Get all highscores
 const getHighscores = async (req, res) => {
-  const highscores = await Highscore.find({}).sort({ score: -1 });
+  const highscores = await Highscore.find({}).sort({
+    score: -1,
+    time: 1,
+    createdAt: 1,
+  });
+
+  if (!highscores.length) return res.status(204).json([]);
 
   res.status(200).json(highscores);
 };
@@ -14,7 +20,11 @@ const getTopHighscores = async (req, res) => {
 
   if (isNaN(Number(amount))) amount = 5;
 
-  const highscores = await Highscore.find({}).sort({ score: -1, time: 1 }).limit(amount);
+  const highscores = await Highscore.find({})
+    .sort({ score: -1, time: 1, createdAt: 1 })
+    .limit(amount);
+
+  if (!highscores.length) return res.status(204).json([]);
 
   res.status(200).json(highscores);
 };
@@ -23,15 +33,12 @@ const getTopHighscores = async (req, res) => {
 const getHighscore = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ error: "No such highscore." });
-  }
 
   const highscore = await Highscore.findById(id);
 
-  if (!highscore) {
-    return res.status(404).json({ error: "No such highscore." });
-  }
+  if (!highscore) return res.status(404).json({ error: "No such highscore." });
 
   res.status(200).json(highscore);
 };
@@ -52,15 +59,12 @@ const createHighscore = async (req, res) => {
 const deleteHighscore = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ error: "No such highscore." });
-  }
 
   const highscore = await Highscore.findOneAndDelete({ _id: id });
 
-  if (!highscore) {
-    return res.status(404).json({ error: "No such highscore." });
-  }
+  if (!highscore) return res.status(404).json({ error: "No such highscore." });
 
   res.status(200).json(highscore);
 };
@@ -76,9 +80,8 @@ const deleteHighscores = async (req, res) => {
 const updateHighscore = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ error: "No such highscore." });
-  }
 
   const highscore = await Highscore.findOneAndUpdate(
     { _id: id },
@@ -87,9 +90,7 @@ const updateHighscore = async (req, res) => {
     }
   );
 
-  if (!highscore) {
-    return res.status(404).json({ error: "No such highscore." });
-  }
+  if (!highscore) return res.status(404).json({ error: "No such highscore." });
 
   res.status(200).json(highscore);
 };
