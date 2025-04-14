@@ -1,0 +1,15 @@
+.pages {
+  container-type: inline-size;
+}
+
+.highscores h2 {
+  color: var(--clr-neutral-800);
+}
+
+@container (min-width: 800px) {
+  .highscores {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+}
