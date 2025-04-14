@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 import Highscore from "../models/highscoreModel.js";
 
-// get all highscores
+// Get all highscores
 const getHighscores = async (req, res) => {
   const highscores = await Highscore.find({}).sort({ score: -1 });
 
   res.status(200).json(highscores);
 };
 
-// get top highscores
+// Get top highscores
 const getTopHighscores = async (req, res) => {
   let { amount } = req.params;
 
@@ -19,7 +19,7 @@ const getTopHighscores = async (req, res) => {
   res.status(200).json(highscores);
 };
 
-// get a single highscore
+// Get a single highscore
 const getHighscore = async (req, res) => {
   const { id } = req.params;
 
@@ -36,7 +36,7 @@ const getHighscore = async (req, res) => {
   res.status(200).json(highscore);
 };
 
-// create new highscore
+// Create new highscore
 const createHighscore = async (req, res) => {
   const { title, score, time } = req.body;
 
@@ -48,7 +48,7 @@ const createHighscore = async (req, res) => {
   }
 };
 
-// delete a highscore
+// Delete a highscore
 const deleteHighscore = async (req, res) => {
   const { id } = req.params;
 
@@ -65,14 +65,14 @@ const deleteHighscore = async (req, res) => {
   res.status(200).json(highscore);
 };
 
-// delete all highscores
+// Delete all highscores
 const deleteHighscores = async (req, res) => {
   const highscores = await Highscore.deleteMany({});
 
   res.status(200).json(highscores);
 };
 
-// update a highscore
+// Update a highscore
 const updateHighscore = async (req, res) => {
   const { id } = req.params;
 
