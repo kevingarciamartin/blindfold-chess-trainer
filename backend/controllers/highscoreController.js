@@ -49,7 +49,7 @@ const createHighscore = async (req, res) => {
 
   try {
     const highscore = await Highscore.create({ title, score, time });
-    res.status(200).json(highscore);
+    res.status(201).json(highscore);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
