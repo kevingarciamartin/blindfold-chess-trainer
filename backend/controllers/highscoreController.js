@@ -1,42 +1,49 @@
 import mongoose from "mongoose";
 import Highscore from "../models/highscoreModel.js";
 
-// get all highscores
+// Get all highscores
 const getHighscores = async (req, res) => {
-  const highscores = await Highscore.find({}).sort({ score: -1 });
+  const highscores = await Highscore.find({}).sort({
+    score: -1,
+    time: 1,
+    createdAt: 1,
+  });
+
+  if (!highscores.length) return res.status(204).json([]);
 
   res.status(200).json(highscores);
 };
 
-// get top highscores
+// Get top highscores
 const getTopHighscores = async (req, res) => {
   let { amount } = req.params;
 
   if (isNaN(Number(amount))) amount = 5;
 
-  const highscores = await Highscore.find({}).sort({ score: -1, time: 1 }).limit(amount);
+  const highscores = await Highscore.find({})
+    .sort({ score: -1, time: 1, createdAt: 1 })
+    .limit(amount);
+
+  if (!highscores.length) return res.status(204).json([]);
 
   res.status(200).json(highscores);
 };
 
-// get a single highscore
+// Get a single highscore
 const getHighscore = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ error: "No such highscore." });
-  }
 
   const highscore = await Highscore.findById(id);
 
-  if (!highscore) {
-    return res.status(404).json({ error: "No such highscore." });
-  }
+  if (!highscore) return res.status(404).json({ error: "No such highscore." });
 
   res.status(200).json(highscore);
 };
 
-// create new highscore
+// Create new highscore
 const createHighscore = async (req, res) => {
   const { title, score, time } = req.body;
 
@@ -48,37 +55,33 @@ const createHighscore = async (req, res) => {
   }
 };
 
-// delete a highscore
+// Delete a highscore
 const deleteHighscore = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ error: "No such highscore." });
-  }
 
   const highscore = await Highscore.findOneAndDelete({ _id: id });
 
-  if (!highscore) {
-    return res.status(404).json({ error: "No such highscore." });
-  }
+  if (!highscore) return res.status(404).json({ error: "No such highscore." });
 
   res.status(200).json(highscore);
 };
 
-// delete all highscores
+// Delete all highscores
 const deleteHighscores = async (req, res) => {
   const highscores = await Highscore.deleteMany({});
 
   res.status(200).json(highscores);
 };
 
-// update a highscore
+// Update a highscore
 const updateHighscore = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).json({ error: "No such highscore." });
-  }
 
   const highscore = await Highscore.findOneAndUpdate(
     { _id: id },
@@ -87,9 +90,7 @@ const updateHighscore = async (req, res) => {
     }
   );
 
-  if (!highscore) {
-    return res.status(404).json({ error: "No such highscore." });
-  }
+  if (!highscore) return res.status(404).json({ error: "No such highscore." });
 
   res.status(200).json(highscore);
 };

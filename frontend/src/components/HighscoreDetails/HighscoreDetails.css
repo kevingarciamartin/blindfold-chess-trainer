@@ -1,33 +1,47 @@
 .highscore-details {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
   position: relative;
 
   background: var(--clr-background-primary);
   border-radius: 4px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
-  margin: 20px auto;
+  margin: 10px auto;
   padding: 20px;
+
+  counter-increment: highscore-counter;
+
+  span::before {
+    content: counter(highscore-counter, decimal-leading-zero);
+    font-size: 1.75rem;
+  }
+
+  > div {
+    width: 100%;
+  }
 
   h3 {
     color: var(--clr-primary);
     font-size: 1.2em;
-    margin: 0 0 10px 0;
+    margin: 0 0 10px;
+  }
+
+  main {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
   p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5ch;
+
     color: var(--clr-neutral-700);
     font-size: 0.9em;
     margin: 0;
-  }
-
-  span {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    
-    background: #f1f1f1;
-    border-radius: 50%;
-    color: var(--clr-neutral-800);
-    cursor: pointer;
-    padding: 6px;
   }
 }
