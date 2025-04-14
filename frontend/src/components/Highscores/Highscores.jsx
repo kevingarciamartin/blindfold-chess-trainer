@@ -57,8 +57,8 @@ export default function Highscores() {
       }
     };
 
-    fetchHighscores();
     fetchTopHighscores();
+    fetchHighscores();
   }, []);
 
   if (highscores === null && topHighscores === null) {
@@ -74,21 +74,25 @@ export default function Highscores() {
       {topHighscores && topHighscores.length > 0 && (
         <section className="top-highscores">
           <h2>Top Highscores</h2>
-          <main>
+          <ul>
             {topHighscores.map((highscore) => (
-              <HighscoreDetails key={highscore._id} highscore={highscore} />
+              <li key={highscore._id}>
+                <HighscoreDetails highscore={highscore} />
+              </li>
             ))}
-          </main>
+          </ul>
         </section>
       )}
       {highscores && highscores.length > 0 && (
         <section className="all-highscores">
           <h2>Highscores</h2>
-          <main>
+          <ul>
             {highscores.map((highscore) => (
-              <HighscoreDetails key={highscore._id} highscore={highscore} />
+              <li key={highscore._id}>
+                <HighscoreDetails highscore={highscore} />
+              </li>
             ))}
-          </main>
+          </ul>
         </section>
       )}
     </div>

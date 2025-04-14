@@ -6,16 +6,21 @@ export default function HighscoreDetails({ highscore }) {
 
   return (
     <article className="highscore-details">
-      <h3>{title}</h3>
-      <p>
-        <strong>Score: </strong>
-        {score}
-      </p>
-      <p>
-        <strong>Time: </strong>
-        {formatTimer(time)}
-      </p>
-      <p>{formatDate(createdAt)}</p>
+      <span></span>
+      <div>
+        <h3>{title}</h3>
+        <main>
+          <p>
+            Score:
+            <strong>{score}</strong>
+          </p>
+          <p>
+            Time:
+            <strong>{formatTimer(time)}</strong>
+          </p>
+          <p>{formatDate(createdAt)}</p>
+        </main>
+      </div>
     </article>
   );
 }
