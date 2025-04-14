@@ -4,7 +4,7 @@
   "description": "",
   "main": "./frontend/src/main.jsx",
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix backend\" \"sleep 1 && npm run dev --prefix frontend\"",
+    "dev": "concurrently \"npm run dev --prefix backend\" \"sleep 0.5 && npm run dev --prefix frontend\"",
     "sync-branch": "CURRENT_BRANCH=$(git branch --show-current) && git checkout main && git pull && git checkout $CURRENT_BRANCH && git merge main && git push",
     "delete-branch": "CURRENT_BRANCH=$(git branch --show-current) && git checkout main && git pull && git push origin --delete $CURRENT_BRANCH && git branch -d $CURRENT_BRANCH && git branch"
   },
