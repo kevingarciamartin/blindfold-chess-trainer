@@ -2,14 +2,13 @@ import "./Square.css";
 
 export default function Square({
   coordinate,
-  index,
+  row,
+  column,
   onSquareClick,
   isHighlighted,
   isInteractive,
 }) {
-  const row = Math.trunc(index / 8);
-  const column = (index % 8) + 1;
-  const isDarkSquare = (row + column) % 2 === 0;
+  const isDarkSquare = (row + column) % 2 === 1;
 
   let highlightClass = "";
   if (isHighlighted === true) highlightClass = "correct";

@@ -2,12 +2,17 @@
   --_clr-light: #ecdab9;
   --_clr-dark: #ae8a68;
 
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  display: flex;
+  flex-direction: column;
 
   border-radius: 0.5rem;
   width: min(600px, 100%);
   aspect-ratio: 1;
   margin: 0 auto;
   overflow: clip;
+
+  [role="row"] {
+    display: flex;
+    flex: 1 1 0;
+  }
 }
