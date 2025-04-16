@@ -19,7 +19,7 @@ export default function Game() {
   const [playerName, setPlayerName] = useState("");
   const showNotification = useNotification();
 
-  const ROUNDS = 1;
+  const ROUNDS = 10;
   const coordinates = getCoordinates().flat();
 
   // Start game
