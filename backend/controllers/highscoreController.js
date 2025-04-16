@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import validator from "validator";
 import Highscore from "../models/highscoreModel.js";
 
 // Get all highscores
@@ -45,7 +46,9 @@ const getHighscore = async (req, res) => {
 
 // Create new highscore
 const createHighscore = async (req, res) => {
-  const { title, score, time } = req.body;
+  let { title, score, time } = req.body;
+
+  title = validator.escape(title);
 
   try {
     const highscore = await Highscore.create({ title, score, time });
