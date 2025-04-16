@@ -1,7 +1,7 @@
 # Visionoir — a blindfold chess training app
 
 ## Summary of application
-Visionoir is a tool designed to improve board awareness by challenging users to click on specific squares without seeing the board coordinates. The game consists of ten rounds, where the goal is to be as accurate as possible while a timer runs, testing both precision and speed. This engaging training tool helps players sharpen their spatial memory and focus under time pressure.
+Visionoir is a chess tool designed to improve board awareness by challenging users to click on specific squares without seeing the board coordinates. The game consists of ten rounds, where the goal is to be as accurate as possible while a timer runs, testing both precision and speed. This engaging training tool helps players sharpen their spatial memory and focus under time pressure.
 
 ## Table of Content
 1. [How to Run](#how-to-run)
