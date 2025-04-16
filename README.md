@@ -93,5 +93,6 @@ To ensure that my application is accessible, I have followed best practices for 
 I've improved SEO by adding a meta description element which provides a summary of the application's content that search engines include in search results. A high-quality, unique meta description makes my page appear more relevant and can increase my search traffic.
 
 ## Tracking
+I have implemented Google Analytics tracking to gain insights into how users interact with the features and to identify opportunities for improvement. The tracking only collects anonymous usage data, such as page views, number of unique users and number of active users, which helps me optimize the user experience. I do not collect any personally identifiable information, and I am mindful of user privacy in all analytics practices.
 
 ## Security
