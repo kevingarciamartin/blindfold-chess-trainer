@@ -2,17 +2,15 @@ import "./Square.css";
 
 export default function Square({
   coordinate,
-  index,
+  row,
+  column,
   onSquareClick,
   isHighlighted,
   isInteractive,
 }) {
-  const row = Math.trunc(index / 8);
-  const column = (index % 8) + 1;
-  const isDarkSquare = (row + column) % 2 === 0;
+  const isDarkSquare = (row + column) % 2 === 1;
 
   let highlightClass = "";
-
   if (isHighlighted === true) highlightClass = "correct";
   if (isHighlighted === false) highlightClass = "incorrect";
 
@@ -25,9 +23,15 @@ export default function Square({
             isDarkSquare ? "dark" : "light"
           } ${highlightClass}`}
           onClick={() => onSquareClick(coordinate)}
+          role="gridcell"
+          aria-label={coordinate}
         ></button>
       ) : (
-        <div className={`square ${isDarkSquare ? "dark" : "light"} uninteractive`}></div>
+        <div
+          className={`square ${isDarkSquare ? "dark" : "light"} uninteractive`}
+          role="gridcell"
+          aria-label={coordinate}
+        ></div>
       )}
     </>
   );

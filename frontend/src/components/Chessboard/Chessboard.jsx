@@ -11,17 +11,24 @@ export default function Chessboard({
   const coordinates = getCoordinates();
 
   return (
-    <section className="chessboard">
-      {coordinates.map((coordinate, index) => (
-        <Square
-          key={coordinate}
-          coordinate={coordinate}
-          index={index}
-          onSquareClick={onSquareClick}
-          isHighlighted={clickedSquare === coordinate ? isCorrectClick : null}
-          isInteractive={isInteractive}
-        />
+    <div className="chessboard" role="grid" aria-label="Chessboard">
+      {coordinates.map((rowCoordinates, rowIndex) => (
+        <div key={rowIndex} role="row">
+          {rowCoordinates.map((coordinate, colIndex) => (
+            <Square
+              key={coordinate}
+              coordinate={coordinate}
+              row={rowIndex}
+              column={colIndex}
+              onSquareClick={onSquareClick}
+              isHighlighted={
+                clickedSquare === coordinate ? isCorrectClick : null
+              }
+              isInteractive={isInteractive}
+            />
+          ))}
+        </div>
       ))}
-    </section>
+    </div>
   );
 }

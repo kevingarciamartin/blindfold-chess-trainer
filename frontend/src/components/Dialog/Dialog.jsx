@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 
 export default function Dialog({ title, children, isOpen, onClose }) {
   const dialogRef = useRef(null);
+  const titleId = title.split(" ").join("-").toLowerCase();
 
   useEffect(() => {
     const dialog = dialogRef.current;
@@ -21,8 +22,13 @@ export default function Dialog({ title, children, isOpen, onClose }) {
   }, [isOpen]);
 
   return ReactDOM.createPortal(
-    <dialog ref={dialogRef} className="dialog" onClose={onClose}>
-      <h2>{title}</h2>
+    <dialog
+      ref={dialogRef}
+      className="dialog"
+      onClose={onClose}
+      aria-labelledby={titleId}
+    >
+      <h2 id={titleId}>{title}</h2>
       <main>{children}</main>
     </dialog>,
     document.body
