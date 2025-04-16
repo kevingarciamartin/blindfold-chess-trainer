@@ -9,10 +9,9 @@ export default function Chessboard({
   isInteractive = true,
 }) {
   const coordinates = getCoordinates();
-  console.log(coordinates)
 
   return (
-    <section className="chessboard" role="grid" aria-label="Chessboard">
+    <div className="chessboard" role="grid" aria-label="Chessboard">
       {coordinates.map((rowCoordinates, rowIndex) => (
         <div key={rowIndex} role="row">
           {rowCoordinates.map((coordinate, colIndex) => (
@@ -30,6 +29,6 @@ export default function Chessboard({
           ))}
         </div>
       ))}
-    </section>
+    </div>
   );
 }
