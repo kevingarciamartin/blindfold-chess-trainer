@@ -3,7 +3,13 @@
 ## Summary of application
 Visionoir is a tool designed to improve board awareness by challenging users to click on specific squares without seeing the board coordinates. The game consists of ten rounds, where the goal is to be as accurate as possible while a timer runs, testing both precision and speed. This engaging training tool helps players sharpen their spatial memory and focus under time pressure.
 
-## How to run
+## Table of Content
+1. [How to Run](#how-to-run)
+2. [Accessability & SEO](#accessability--seo)
+3. [Tracking](#tracking)
+4. [Security](#security)
+
+## How to Run
 Follow these steps below to run the application on your computer.
 
 ### Prerequisites
