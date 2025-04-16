@@ -1,5 +1,5 @@
 const stringOuterProduct = (vec1, vec2) =>
-  vec1.flatMap((string1) => vec2.map((string2) => `${string2}${string1}`));
+  vec1.map((row) => vec2.map((col) => `${col}${row}`));
 
 export const getCoordinates = () => {
   const rows = ["8", "7", "6", "5", "4", "3", "2", "1"];
