@@ -11,19 +11,33 @@ export default function Highscores() {
   useEffect(() => {
     const fetchHighscores = async () => {
       try {
-        const response = await fetch("/api/highscores");
+        const [resTopHighscores, resHighscores] = await Promise.all([
+          fetch("/api/highscores/top/5"),
+          fetch("/api/highscores"),
+        ]);
 
-        if (response.status === 204) {
+        if (resTopHighscores.status === 204 || resHighscores.status === 204) {
+          setTopHighscores([]);
           setHighscores([]);
           return;
         }
 
-        if (response.ok) {
-          const data = await response.json();
-          setHighscores(data);
+        if (resTopHighscores.ok) {
+          const dataTopHighscores = await resTopHighscores.json();
+          setTopHighscores(dataTopHighscores);
         } else {
           showNotification(
-            `Failed to fetch highscores: ${response.status} ${response.statusText}`,
+            `Failed to fetch highscores: ${resTopHighscores.status} ${resTopHighscores.statusText}`,
+            "error"
+          );
+        }
+
+        if (resHighscores.ok) {
+          const dataHighscores = await resHighscores.json();
+          setHighscores(dataHighscores);
+        } else {
+          showNotification(
+            `Failed to fetch highscores: ${resHighscores.status} ${resHighscores.statusText}`,
             "error"
           );
         }
@@ -33,36 +47,22 @@ export default function Highscores() {
       }
     };
 
-    const fetchTopHighscores = async () => {
-      try {
-        const response = await fetch("/api/highscores/top/5");
-
-        if (response.status === 204) {
-          setTopHighscores([]);
-          return;
-        }
-
-        if (response.ok) {
-          const data = await response.json();
-          setTopHighscores(data);
-        } else {
-          showNotification(
-            `Failed to fetch top highscores: ${response.status} ${response.statusText}`,
-            "error"
-          );
-        }
-      } catch (error) {
-        showNotification("Error fetching top highscores.", "error");
-        console.error("Error fetching top highscores:", error);
-      }
-    };
-
-    fetchTopHighscores();
     fetchHighscores();
   }, []);
 
   if (highscores === null && topHighscores === null) {
-    return <p>Loading...</p>;
+    return (
+      <div className="highscores">
+        <section className="top-highscores">
+          <h2>Top Highscores</h2>
+          <p>Loading...</p>
+        </section>
+        <section className="all-highscores">
+          <h2>Highscores</h2>
+          <p>Loading...</p>
+        </section>
+      </div>
+    );
   }
 
   return (
