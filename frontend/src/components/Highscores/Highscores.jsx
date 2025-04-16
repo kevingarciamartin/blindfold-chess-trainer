@@ -70,7 +70,18 @@ export default function Highscores() {
       {highscores &&
         topHighscores &&
         highscores.length === 0 &&
-        highscores.length === 0 && <p>No highscores available.</p>}
+        highscores.length === 0 && (
+          <>
+            <section className="top-highscores">
+              <h2>Top Highscores</h2>
+              <p>No highscores available.</p>
+            </section>
+            <section className="all-highscores">
+              <h2>Highscores</h2>
+              <p>No highscores available.</p>
+            </section>
+          </>
+        )}
       {topHighscores && topHighscores.length > 0 && (
         <section className="top-highscores">
           <h2>Top Highscores</h2>
