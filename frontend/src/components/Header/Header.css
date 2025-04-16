@@ -9,6 +9,10 @@ header {
     max-width: 1400px;
     margin: 0 auto;
     padding: 10px 20px;
+
+    img {
+      translate: 0 0.125rem;
+    }
   }
 
   a {
@@ -28,7 +32,7 @@ header {
       font-weight: 600;
 
       &:is(.active) {
-        text-decoration: underline solid 0.25rem!important;
+        text-decoration: underline solid 0.25rem !important;
         text-underline-offset: 0.375rem;
       }
     }
