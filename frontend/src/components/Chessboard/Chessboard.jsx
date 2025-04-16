@@ -11,7 +11,7 @@ export default function Chessboard({
   const coordinates = getCoordinates();
 
   return (
-    <section className="chessboard">
+    <section className="chessboard" role="grid" aria-label="Chessboard">
       {coordinates.map((coordinate, index) => (
         <Square
           key={coordinate}
