@@ -20,7 +20,7 @@ export default function Game() {
   const showNotification = useNotification();
 
   const ROUNDS = 1;
-  const coordinates = getCoordinates();
+  const coordinates = getCoordinates().flat();
 
   // Start game
   useEffect(() => {
