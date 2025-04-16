@@ -21,7 +21,11 @@ export default function Notification({
   if (!visible) return null;
 
   return (
-    <div className={`notification ${type}`}>
+    <div
+      className={`notification ${type}`}
+      role="alert"
+      aria-live={type === "error" ? "assertive" : "polite"}
+    >
       <p>{message}</p>
     </div>
   );
