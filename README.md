@@ -5,6 +5,9 @@ Visionoir is a tool designed to improve board awareness by challenging users to 
 
 ## Table of Content
 1. [How to Run](#how-to-run)
+    - [Prerequisites](#prerequisites)
+    - [Project Structure](#project-structure)
+    - [Steps to Run the Application](#steps-to-run-the-application)
 2. [Accessability & SEO](#accessability--seo)
 3. [Tracking](#tracking)
 4. [Security](#security)
