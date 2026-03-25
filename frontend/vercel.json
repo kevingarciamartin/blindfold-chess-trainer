@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://blindfold-chess-trainer-4875860f9b0f.herokuapp.com/api/$1"
+    }
+  ]
+}
