@@ -13,6 +13,14 @@
 
   counter-increment: highscore-counter;
 
+  span {
+    display: inline-flex;
+    justify-content: center;
+    width: 2.5ch;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+
   span::before {
     content: counter(highscore-counter, decimal-leading-zero);
     font-size: 1.75rem;
